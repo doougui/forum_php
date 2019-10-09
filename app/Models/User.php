@@ -93,6 +93,19 @@
 			}
 		}
 
+		public function deleteUser($id) {
+			$sql = "DELETE FROM user WHERE id = :id";
+			$sql = $this -> db -> prepare($sql);
+			$sql -> bindParam(":id", $id, \PDO::PARAM_INT);
+			$sql -> execute();
+
+			if ($sql -> rowCount() > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		private function emailExists($email) {
 			$sql = "SELECT id FROM user 
 							WHERE email = :email";

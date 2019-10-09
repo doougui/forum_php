@@ -162,4 +162,32 @@ $(document).ready(function() {
 
 		return false;
 	});
+
+	$('#delete-user').on('click', function(e) {
+		e.preventDefault();
+
+		const user_id = $(this).attr('data-userid');
+
+		$.ajax({
+			url: DIRPAGE + 'ajax/deleteUser',
+			type: 'POST',
+			data: {
+				id: user_id
+			},
+			beforeSend: function() {
+				$(this).css('cursor', 'default');
+			}
+		}).done(function(response) {
+			if (response.length != 0) {
+				$('.error-msg').html(response).fadeIn();
+			} else {
+				alert('Conta excluida com sucesso.');
+				window.location.href = DIRPAGE + 'login';
+			}
+		}).fail(function() {
+			alert('Ops! Algo de errado aconteceu!');
+		}).always(function() {
+			$(this).css('cursor', 'pointer');
+		});
+	});
 });

@@ -126,6 +126,24 @@
 			}
 		}
 
+		public function deleteUser() {
+			$user = new User();
+
+			if (isset($_POST['id']) && !empty($_POST['id'])) {
+				$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS); 
+
+				if (isset($_SESSION['user']) && $_SESSION['user']['id'] == $id) {
+					if ($user -> deleteUser($id)) {
+						return true;
+					} else {
+						echo "Não foi possível deletar sua conta.";
+					}
+				}
+			} else {
+				echo "Preencha todos os campos para continuar.";
+			}
+		}
+
 		public function newTopic() {
 			$topic = new Topic();
 

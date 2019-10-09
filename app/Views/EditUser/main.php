@@ -25,5 +25,7 @@
 		<div class="error-msg"></div>
 	
 		<button type="submit" class="button">Editar</button>
+
+		<a href="#" id="delete-user" data-userid="<?= $user['id'] ?>" class="ml-2">Excluir conta</a>
 	</form>
 </div>
